@@ -1,0 +1,52 @@
+.homeContainer {
+  background-image: url(../../assets/Picture-Bg@1x.jpg);
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+}
+
+.homeContent {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+  padding-top: 260px;
+  padding-left: 64px;
+}
+
+.homeTitle {
+  color: #f7f7f7;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 32.16px;
+  letter-spacing: 0%;
+  text-align: left;
+  padding-bottom: 16px;
+}
+
+.homeText {
+  color: #f7f7f7;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 31.92px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
+.homeLink {
+  width: 173px;
+  height: 56px;
+  border-radius: 200px;
+  padding: 16px 60px;
+  background: #e44848;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
