@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
 const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
   const equipmentItems = [
@@ -9,6 +10,7 @@ const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
     "Bathroom",
     "Microwave",
   ];
+  const dispatch = useDispatch();
 
   const handleSelect = (item) => {
     if (selectedEquipment.includes(item)) {
