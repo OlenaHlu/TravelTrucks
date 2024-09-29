@@ -89,7 +89,7 @@ const CamperCard = ({ camper }) => {
           microwave={microwave}
         />
         <div className={css.bottomLink}>
-          <Link className={css.camperBtn} to={`/catalog/${id}`}>
+          <Link className={css.camperBtn} to={`/catalog/:${id}`}>
             Show more
           </Link>
         </div>

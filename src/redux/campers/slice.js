@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCampersAll } from "./operations";
+import { fetchCampersAll, fetchCamperById } from "./operations";
 
 const handlePending = (state) => {
   state.loading = true;
@@ -14,6 +14,7 @@ const campersSlice = createSlice({
   name: "campers",
   initialState: {
     items: [],
+    camper: {},
     loading: false,
     error: null,
     filters: {
@@ -45,7 +46,15 @@ const campersSlice = createSlice({
         state.error = null;
         state.items = action.payload;
       })
-      .addCase(fetchCampersAll.rejected, handleRejected);
+      .addCase(fetchCampersAll.rejected, handleRejected)
+
+      .addCase(fetchCamperById.pending, handlePending)
+      .addCase(fetchCamperById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.camper = action.payload;
+      })
+      .addCase(fetchCamperById.rejected, handleRejected);
   },
 });
 
@@ -76,21 +85,6 @@ const favoritesSlice = createSlice({
     },
   },
 });
-
-// const filtersSlice = createSlice({
-//   name: "filters",
-//   initialState: {
-//     location: "",
-//     selectedVehicleType: "",
-//     selectedEquipment: [],
-//   },
-//   reducers: {
-//     setFilters: (state, action) => {
-//       return { ...state, ...action.payload };
-//     },
-//     resetFilters: () => initialState,
-//   },
-// });
 
 export const { toggleFavorite } = favoritesSlice.actions;
 

@@ -1,0 +1,38 @@
+.container {
+  width: 1312px;
+  border-bottom: 1px solid #dadde1;
+  margin-bottom: 44px;
+  padding-bottom: 24px;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: #4a4a4a;
+  transition: color 0.3s, border-bottom 0.3s;
+  position: relative;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-right: 40px;
+}
+
+.tabButton:hover {
+  font-weight: bold;
+}
+
+.tabButton.active {
+  font-weight: bold;
+}
+
+.tabButton.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -24px;
+  height: 5px;
+  background: #d84343;
+}

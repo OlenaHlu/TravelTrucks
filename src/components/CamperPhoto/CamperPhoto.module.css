@@ -11,3 +11,13 @@
   border-radius: 10px;
   object-fit: cover;
 }
+
+.camperDetailList {
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  width: 292px;
+  height: 312px;
+  margin-top: 28px;
+  margin-bottom: 28px;
+}
