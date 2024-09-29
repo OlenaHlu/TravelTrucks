@@ -1,3 +1,5 @@
+import css from "./VehicleType.module.css";
+
 const VehicleType = ({ selectedVehicleType, setSelectedVehicleType }) => {
   const vehicleTypes = ["Van", "Fully Integrated", "Alcove"];
 
@@ -5,11 +7,16 @@ const VehicleType = ({ selectedVehicleType, setSelectedVehicleType }) => {
     setSelectedVehicleType(type);
   };
   return (
-    <div>
-      <h3>Vehicle type</h3>
-      <div>
+    <div className={css.container}>
+      <h3 className={css.title}>Vehicle type</h3>
+      <hr className={css.line} />
+      <div className={css.btnItems}>
         {vehicleTypes.map((type) => (
-          <button key={type} onClick={() => handleSelect(type)}>
+          <button
+            className={css.btn}
+            key={type}
+            onClick={() => handleSelect(type)}
+          >
             {type}
           </button>
         ))}

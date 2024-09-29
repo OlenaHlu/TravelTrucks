@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import css from "./VehicleEquipment.module.css";
 
 const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
   const equipmentItems = [
@@ -21,11 +22,16 @@ const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
   };
 
   return (
-    <div>
-      <h3>Vehicle equipment</h3>
-      <div>
+    <div className={css.container}>
+      <h3 className={css.title}>Vehicle equipment</h3>
+      <hr className={css.line} />
+      <div className={css.btnItems}>
         {equipmentItems.map((item) => (
-          <button key={item} onClick={() => handleSelect(item)}>
+          <button
+            className={css.btn}
+            key={item}
+            onClick={() => handleSelect(item)}
+          >
             {item}
           </button>
         ))}

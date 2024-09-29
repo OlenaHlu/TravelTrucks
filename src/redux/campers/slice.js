@@ -16,8 +16,27 @@ const campersSlice = createSlice({
     items: [],
     loading: false,
     error: null,
+    filters: {
+      location: "",
+      selectedVehicleType: "",
+      selectedEquipment: [],
+    },
   },
-  reducers: {},
+  reducers: {
+    setFilters: (state, action) => {
+      state.filters = {
+        ...state.filters,
+        ...action.payload,
+      };
+    },
+    resetFilters: (state) => {
+      state.filters = {
+        location: "",
+        selectedVehicleType: "",
+        selectedEquipment: [],
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCampersAll.pending, handlePending)
@@ -58,23 +77,24 @@ const favoritesSlice = createSlice({
   },
 });
 
-const filtersSlice = createSlice({
-  name: "filters",
-  initialState: {
-    location: "",
-    selectedVehicleType: "",
-    selectedEquipment: [],
-  },
-  reducers: {
-    setFilters: (state, action) => {
-      return { ...state, ...action.payload };
-    },
-    resetFilters: () => initialState,
-  },
-});
-export const { setFilters, resetFilters } = filtersSlice.actions;
-export const filtersReducer = filtersSlice.reducer;
+// const filtersSlice = createSlice({
+//   name: "filters",
+//   initialState: {
+//     location: "",
+//     selectedVehicleType: "",
+//     selectedEquipment: [],
+//   },
+//   reducers: {
+//     setFilters: (state, action) => {
+//       return { ...state, ...action.payload };
+//     },
+//     resetFilters: () => initialState,
+//   },
+// });
 
 export const { toggleFavorite } = favoritesSlice.actions;
+
+export const { setFilters, resetFilters } = campersSlice.actions;
+
 export const campersReducer = campersSlice.reducer;
 export const favoritesReducer = favoritesSlice.reducer;

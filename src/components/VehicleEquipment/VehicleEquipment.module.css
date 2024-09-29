@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #101828;
+}
+
+.line {
+  color: #dadde1;
+  width: 360px;
+  height: 1px;
+  background-color: #dadde1;
+  stroke-width: 1px;
+  margin: 0px;
+  padding: 0px;
+}
+.btnItems {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 12px;
+  row-gap: 8px;
+}
+
+.btn {
+  border: 1px solid #dadde1;
+  border-radius: 12px;
+  padding: 16px 18px;
+  width: 112px;
+  height: 96px;
+}

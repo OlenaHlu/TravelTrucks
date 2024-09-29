@@ -1,6 +1,6 @@
 import CamperCard from "../CamperCard/CamperCard";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import {
   selectCampers,
   selectError,
@@ -20,31 +20,41 @@ const CampersList = () => {
   useEffect(() => {
     dispatch(fetchCampersAll());
   }, [dispatch]);
-  const filteredCampers = campers.filter((camper) => {
-    if (
-      filters.location &&
-      !camper.location.toLowerCase().includes(filters.location.toLowerCase())
-    ) {
-      return false;
+
+  const filteredCampers = useMemo(() => {
+    if (!Array.isArray(campers) || campers.length === 0) {
+      return [];
     }
 
-    if (filters.selectedEquipment.length > 0) {
-      for (const equipment of filters.selectedEquipment) {
-        if (!camper[equipment]) {
-          return false;
+    return campers.filter((camper) => {
+      // Фільтр за локацією
+      if (
+        filters.location &&
+        !camper.location.toLowerCase().includes(filters.location.toLowerCase())
+      ) {
+        return false;
+      }
+
+      // Фільтр за обладнанням
+      if (filters.selectedEquipment.length > 0) {
+        for (const equipment of filters.selectedEquipment) {
+          if (!camper[equipment]) {
+            return false;
+          }
         }
       }
-    }
 
-    if (
-      filters.selectedVehicleType &&
-      filters.selectedVehicleType !== camper.type
-    ) {
-      return false;
-    }
+      // Фільтр за типом кузова
+      if (
+        filters.selectedVehicleType &&
+        filters.selectedVehicleType.toLowerCase() !== camper.type.toLowerCase()
+      ) {
+        return false;
+      }
 
-    return true;
-  });
+      return true;
+    });
+  }, [campers, filters]);
 
   if (loading) {
     return <Loader />;
@@ -66,6 +76,7 @@ const CampersList = () => {
           </li>
         ))}
       </ul>
+      <button>Load more</button>
     </div>
   );
 };

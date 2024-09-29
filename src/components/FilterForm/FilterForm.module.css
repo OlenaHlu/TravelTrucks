@@ -1,0 +1,36 @@
+.felters {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #475467;
+}
+
+.btn {
+  border-radius: 200px;
+  padding: 16px 60px;
+  width: 166px;
+  height: 56px;
+  background-color: #e44848;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  color: #fff;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:focus,
+.btn:hover {
+  background-color: #d84343;
+}
