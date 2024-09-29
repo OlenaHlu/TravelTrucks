@@ -1,0 +1,30 @@
+.eqIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.equipmentList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+  margin-top: 18px;
+  max-width: 524px;
+  max-height: 104px;
+}
+
+.equipmentItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 100px;
+  padding: 12px 18px;
+  background: #f2f4f7;
+  mix-blend-mode: multiply;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: #101828;
+}

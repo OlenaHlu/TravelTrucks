@@ -1,4 +1,5 @@
 import css from "./VehicleType.module.css";
+import symbolDefs from "../../assets/symbol-defs.svg";
 
 const VehicleType = ({ selectedVehicleType, setSelectedVehicleType }) => {
   const vehicleTypes = ["Van", "Fully Integrated", "Alcove"];
@@ -17,6 +18,9 @@ const VehicleType = ({ selectedVehicleType, setSelectedVehicleType }) => {
             key={type}
             onClick={() => handleSelect(type)}
           >
+            <svg className={css.listImg}>
+              <use href={`${symbolDefs}#icon-${type}`}></use>
+            </svg>
             {type}
           </button>
         ))}

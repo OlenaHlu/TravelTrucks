@@ -9,6 +9,7 @@ import {
 } from "../../redux/campers/selectors";
 import Loader from "../Loader/Loader";
 import { fetchCampersAll } from "../../redux/campers/operations";
+import css from "./CampersList.module.css";
 
 const CampersList = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const CampersList = () => {
         }
       }
 
-      // Фільтр за типом кузова
+      // Фільтр за типом
       if (
         filters.selectedVehicleType &&
         filters.selectedVehicleType.toLowerCase() !== camper.type.toLowerCase()
@@ -68,15 +69,15 @@ const CampersList = () => {
   }
 
   return (
-    <div>
-      <ul>
+    <div className={css.listContent}>
+      <ul className={css.campersItem}>
         {filteredCampers.map((camper) => (
           <li key={camper.id}>
             <CamperCard camper={camper} />
           </li>
         ))}
       </ul>
-      <button>Load more</button>
+      <button className={css.moreBtn}>Load more</button>
     </div>
   );
 };

@@ -1,3 +1,6 @@
+import symbolDefs from "../../assets/symbol-defs.svg";
+import css from "./CardEquipments.module.css";
+
 const CardEquipments = ({
   AC,
   automatic,
@@ -8,13 +11,55 @@ const CardEquipments = ({
 }) => {
   return (
     <div>
-      <ul>
-        {AC && <li>Air Conditioning</li>}
-        {automatic && <li>Automatic Transmission</li>}
-        {kitchen && <li>Kitchen</li>}
-        {TV && <li>TV</li>}
-        {bathroom && <li>Bathroom</li>}
-        {microwave && <li>Microwave</li>}
+      <ul className={css.equipmentList}>
+        {AC && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-AC"}`} />
+            </svg>
+            AC
+          </li>
+        )}
+        {automatic && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-Automatic"}`} />
+            </svg>
+            Automatic
+          </li>
+        )}
+        {kitchen && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-Kitchen"}`} />
+            </svg>
+            Kitchen
+          </li>
+        )}
+        {TV && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-TV"}`} />
+            </svg>
+            TV
+          </li>
+        )}
+        {bathroom && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-Bathroom"}`} />
+            </svg>
+            Bathroom
+          </li>
+        )}
+        {microwave && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-Microwave"}`} />
+            </svg>
+            Microwave
+          </li>
+        )}
       </ul>
     </div>
   );

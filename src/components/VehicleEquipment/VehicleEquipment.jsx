@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import css from "./VehicleEquipment.module.css";
+import symbolDefs from "../../assets/symbol-defs.svg";
 
 const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
   const equipmentItems = [
@@ -32,6 +33,9 @@ const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
             key={item}
             onClick={() => handleSelect(item)}
           >
+            <svg className={css.listImg}>
+              <use href={`${symbolDefs}#icon-${item}`}></use>
+            </svg>
             {item}
           </button>
         ))}
