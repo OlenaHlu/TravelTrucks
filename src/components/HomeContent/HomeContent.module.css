@@ -15,7 +15,7 @@
 }
 
 .homeTitle {
-  color: #f7f7f7;
+  color: var(--inputs);
   font-weight: 600;
   font-size: 48px;
   line-height: 32.16px;
@@ -25,7 +25,7 @@
 }
 
 .homeText {
-  color: #f7f7f7;
+  color: var(--inputs);
   font-weight: 600;
   font-size: 24px;
   line-height: 31.92px;
@@ -38,15 +38,11 @@
   height: 56px;
   border-radius: 200px;
   padding: 16px 60px;
-  background: #e44848;
+  background-color: var(--button);
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  color: #ffffff;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
+  color: var(--white);
   white-space: nowrap;
 }

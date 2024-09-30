@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import Reviews from "../Reviews/Reviews";
+import Features from "../Features/Features";
 import css from "./CamperTabs.module.css";
 
 const CamperTabs = () => {
-  const [activeTab, setActiveTab] = useState("features");
+  const [activeTab, setActiveTab] = useState(null);
 
   return (
     <div>
@@ -25,13 +27,14 @@ const CamperTabs = () => {
         </button>
       </div>
       <div className={css.tabContent}>
-        {activeTab === "features" ? (
+        {activeTab === "features" && (
           <div className={css.featuresContent}>
-            <p>Тут будуть відображатися особливості транспортного засобу...</p>
+            <Features />
           </div>
-        ) : (
+        )}
+        {activeTab === "reviews" && (
           <div className={css.reviewsContent}>
-            <p>Тут будуть відображатися огляди...</p>
+            <Reviews />
           </div>
         )}
       </div>

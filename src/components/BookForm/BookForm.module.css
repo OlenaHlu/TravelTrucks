@@ -1,0 +1,97 @@
+.bookContainer {
+  width: 641px;
+  display: flex;
+  flex-direction: column;
+  padding: 44px;
+  border: 1px solid var(--gray-light);
+  border-radius: 10px;
+  padding: 44px;
+  align-items: center;
+}
+
+.formContainer {
+  width: 527px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.InfoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 527px;
+}
+.formTitle {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.formText {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--gray);
+}
+
+.formField {
+  border-radius: 12px;
+  border: 1px solid transparent;
+  padding: 18px;
+  width: 527px;
+  height: 60px;
+  background-color: var(--inputs);
+  font-weight: 400;
+  transition: border-color 0.3s ease;
+}
+
+.formField:focus {
+  outline: none;
+  border: 1px solid var(--button-hover);
+}
+
+.formField::placeholder {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--gray);
+}
+.textarea {
+  height: 118px;
+  text-align: start;
+  vertical-align: top;
+  resize: none;
+}
+
+.formBtn {
+  border-radius: 200px;
+  padding: 16px 60px;
+  width: 166px;
+  height: 56px;
+  background-color: var(--button);
+
+  color: var(--white);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 24px;
+}
+
+.formBtn:hover,
+.formBtn:focus {
+  background-color: var(--button-hover);
+}
+
+.errorMessage {
+  color: var(--button-hover);
+  font-size: 12px;
+}

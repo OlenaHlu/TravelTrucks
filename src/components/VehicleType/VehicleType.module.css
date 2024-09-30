@@ -12,10 +12,10 @@
 }
 
 .line {
-  color: #dadde1;
+  color: var(--gray-light);
   width: 360px;
   height: 1px;
-  background-color: #dadde1;
+  background-color: var(--gray-light);
   stroke-width: 1px;
   margin: 0px;
   padding: 0px;
@@ -29,7 +29,7 @@
 }
 
 .btn {
-  border: 1px solid #dadde1;
+  border: 1px solid var(--gray-light);
   border-radius: 12px;
   padding: 4px 16px;
   width: 112px;
@@ -39,15 +39,10 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-
-  font-weight: 500;
-  font-size: 16px;
   line-height: 24px;
-  letter-spacing: -0.01em;
 }
 
 .listImg {
   width: 28px;
   height: 28px;
-  fill: #101828;
 }

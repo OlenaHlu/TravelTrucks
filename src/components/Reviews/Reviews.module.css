@@ -1,0 +1,7 @@
+.revContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-left: 64px;
+  margin-right: 64px;
+}

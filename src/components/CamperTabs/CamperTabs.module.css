@@ -1,6 +1,6 @@
 .container {
   width: 1312px;
-  border-bottom: 1px solid #dadde1;
+  border-bottom: 1px solid var(--gray-light);
   margin-bottom: 44px;
   padding-bottom: 24px;
 }
@@ -10,7 +10,6 @@
   border: none;
   padding: 8px 16px;
   cursor: pointer;
-  color: #4a4a4a;
   transition: color 0.3s, border-bottom 0.3s;
   position: relative;
   font-weight: 600;
@@ -34,5 +33,5 @@
   right: 0;
   bottom: -24px;
   height: 5px;
-  background: #d84343;
+  background: var(--button-hover);
 }

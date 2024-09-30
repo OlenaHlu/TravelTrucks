@@ -32,7 +32,7 @@ const CamperCard = ({ camper }) => {
     dispatch(toggleFavorite(id));
   };
 
-  const maxLength = 57;
+  const maxLength = 64;
   function cutText(description, maxLength) {
     if (description.length <= maxLength) {
       return description;
@@ -50,7 +50,7 @@ const CamperCard = ({ camper }) => {
           <div className={css.cardTitleContent}>
             <h3 className={css.camperTitle}>{name}</h3>
             <div className={css.info}>
-              <p className={css.price}>€{price},00</p>
+              <p className={css.price}>€{price}.00</p>
               <button onClick={handleFavoriteClick}>
                 <svg className={css.likeIcon}>
                   <use

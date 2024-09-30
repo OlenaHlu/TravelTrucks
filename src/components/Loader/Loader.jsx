@@ -10,8 +10,6 @@ const Loader = () => {
         width="80"
         color="#e44848"
         ariaLabel="revolving-dot-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
       />
     </div>
   );
