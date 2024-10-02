@@ -80,14 +80,16 @@ const CamperCard = ({ camper }) => {
           </div>
           <p className={css.description}>{cutText(description, maxLength)}</p>
         </div>
-        <CardEquipments
-          AC={AC}
-          automatic={automatic}
-          kitchen={kitchen}
-          TV={TV}
-          bathroom={bathroom}
-          microwave={microwave}
-        />
+        <div className={css.camperEq}>
+          <CardEquipments
+            AC={AC}
+            automatic={automatic}
+            kitchen={kitchen}
+            TV={TV}
+            bathroom={bathroom}
+            microwave={microwave}
+          />
+        </div>
         <div className={css.bottomLink}>
           <Link className={css.camperBtn} to={`/catalog/:${id}`}>
             Show more

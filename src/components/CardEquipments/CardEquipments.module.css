@@ -7,8 +7,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 18px;
-  margin-top: 18px;
   max-width: 524px;
   max-height: 104px;
 }

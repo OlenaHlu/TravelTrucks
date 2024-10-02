@@ -8,6 +8,11 @@ const CardEquipments = ({
   TV,
   bathroom,
   microwave,
+  engine,
+  radio,
+  refrigerator,
+  gas,
+  water,
 }) => {
   return (
     <div>
@@ -58,6 +63,46 @@ const CardEquipments = ({
               <use xlinkHref={`${symbolDefs}#${"icon-Microwave"}`} />
             </svg>
             Microwave
+          </li>
+        )}
+        {engine && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-fuel-pump"}`} />
+            </svg>
+            Petrol
+          </li>
+        )}
+        {radio && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-radio"}`} />
+            </svg>
+            Radio
+          </li>
+        )}
+        {refrigerator && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-refrigerator"}`} />
+            </svg>
+            Refrigerator
+          </li>
+        )}
+        {gas && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-gas"}`} />
+            </svg>
+            Gas
+          </li>
+        )}
+        {water && (
+          <li className={css.equipmentItem}>
+            <svg className={css.eqIcon}>
+              <use xlinkHref={`${symbolDefs}#${"icon-water"}`} />
+            </svg>
+            Water
           </li>
         )}
       </ul>
