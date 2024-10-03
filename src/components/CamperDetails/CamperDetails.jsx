@@ -44,7 +44,7 @@ const CamperDetails = ({ camper = {} }) => {
                 <span>{location}</span>
               </div>
             </div>
-            <p className={css.price}>€{price},00</p>
+            <p className={css.price}>€{price}.00</p>
           </div>
           <CamperPhoto gallery={gallery || []} showAll />
 
