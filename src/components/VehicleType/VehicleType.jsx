@@ -1,11 +1,19 @@
 import css from "./VehicleType.module.css";
 import symbolDefs from "../../assets/symbol-defs.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { setVehicleType } from "../../redux/campers/slice";
 
-const VehicleType = ({ selectedVehicleType, setSelectedVehicleType }) => {
+const VehicleType = () => {
+  const dispatch = useDispatch();
+
+  const selectedType = useSelector(
+    (state) => state.campers.filters.selectedVehicleType
+  );
+
   const vehicleTypes = ["Van", "Fully Integrated", "Alcove"];
 
   const handleSelect = (type) => {
-    setSelectedVehicleType(type);
+    dispatch(setVehicleType(type));
   };
   return (
     <div className={css.container}>
@@ -14,7 +22,7 @@ const VehicleType = ({ selectedVehicleType, setSelectedVehicleType }) => {
       <div className={css.btnItems}>
         {vehicleTypes.map((type) => (
           <button
-            className={css.btn}
+            className={`${css.btn} ${selectedType === type ? css.active : ""}`}
             key={type}
             onClick={() => handleSelect(type)}
           >

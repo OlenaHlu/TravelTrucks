@@ -1,12 +1,13 @@
 import CamperCard from "../CamperCard/CamperCard";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import {
   selectCampers,
   selectError,
   selectLoading,
   selectFilters,
 } from "../../redux/campers/selectors";
+import React, { useState } from "react";
 import Loader from "../Loader/Loader";
 import { fetchCampersAll } from "../../redux/campers/operations";
 import css from "./CampersList.module.css";
@@ -18,44 +19,42 @@ const CampersList = () => {
   const error = useSelector(selectError);
   const filters = useSelector(selectFilters);
 
+  const [visibleCount, setVisibleCount] = useState(5);
+
+  const handleLoadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 5);
+  };
+
+  const filteredCampers = campers.filter((camper) => {
+    if (
+      filters.location &&
+      !camper.location.toLowerCase().includes(filters.location.toLowerCase())
+    ) {
+      return false;
+    }
+
+    if (
+      filters.selectedVehicleType &&
+      filters.selectedVehicleType !== camper.type
+    ) {
+      return false;
+    }
+
+    if (filters.selectedEquipment.length > 0) {
+      for (const equipment of filters.selectedEquipment) {
+        if (!camper[equipment]) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  });
+
+  const visibleCampers = campers.slice(0, visibleCount);
   useEffect(() => {
     dispatch(fetchCampersAll());
   }, [dispatch]);
-
-  const filteredCampers = useMemo(() => {
-    if (!Array.isArray(campers) || campers.length === 0) {
-      return [];
-    }
-
-    return campers.filter((camper) => {
-      // Фільтр за локацією
-      if (
-        filters.location &&
-        !camper.location.toLowerCase().includes(filters.location.toLowerCase())
-      ) {
-        return false;
-      }
-
-      // Фільтр за обладнанням
-      if (filters.selectedEquipment.length > 0) {
-        for (const equipment of filters.selectedEquipment) {
-          if (!camper[equipment]) {
-            return false;
-          }
-        }
-      }
-
-      // Фільтр за типом
-      if (
-        filters.selectedVehicleType &&
-        filters.selectedVehicleType.toLowerCase() !== camper.type.toLowerCase()
-      ) {
-        return false;
-      }
-
-      return true;
-    });
-  }, [campers, filters]);
 
   if (loading) {
     return <Loader />;
@@ -64,20 +63,24 @@ const CampersList = () => {
   if (error) {
     return <p>Error: {error}</p>;
   }
-  if (filteredCampers.length === 0) {
-    return <p>Sorry, no camper found!</p>;
+  if (campers.length === 0) {
+    return <p>Sorry, no campers available.</p>;
   }
 
   return (
     <div className={css.listContent}>
       <ul className={css.campersItem}>
-        {filteredCampers.map((camper) => (
+        {visibleCampers.map((camper) => (
           <li key={camper.id}>
             <CamperCard camper={camper} />
           </li>
         ))}
       </ul>
-      <button className={css.moreBtn}>Load more</button>
+      {visibleCount < filteredCampers.length && (
+        <button onClick={handleLoadMore} className={css.moreBtn}>
+          Load More
+        </button>
+      )}
     </div>
   );
 };

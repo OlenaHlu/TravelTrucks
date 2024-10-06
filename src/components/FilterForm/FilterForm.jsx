@@ -1,41 +1,68 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Location from "../Location/Location";
 import VehicleEquipment from "../VehicleEquipment/VehicleEquipment";
 import VehicleType from "../VehicleType/VehicleType";
-import { setFilters } from "../../redux/campers/slice";
+import {
+  setLocation,
+  setVehicleType,
+  toggleEquipment,
+  resetFilters,
+} from "../../redux/campers/slice";
 
 import css from "./FilterForm.module.css";
+import { selectFilters } from "../../redux/campers/selectors";
 
 const FilterForm = () => {
   const dispatch = useDispatch();
 
-  const [location, setLocation] = useState("");
-  const [selectedEquipment, setSelectedEquipment] = useState([]);
-  const [selectedVehicleType, setSelectedVehicleType] = useState("");
+  const { location, selectedVehicleType, selectedEquipment } =
+    useSelector(selectFilters);
 
-  const handleSearch = () => {
-    dispatch(
-      setFilters({
-        location,
-        selectedVehicleType,
-        selectedEquipment,
-      })
-    );
-  };
+  // Обробники подій для зміни фільтрів
+  const handleLocationChange = useCallback(
+    (newLocation) => {
+      dispatch(setLocation(newLocation));
+    },
+    [dispatch]
+  );
+
+  const handleVehicleTypeChange = useCallback(
+    (vehicleType) => {
+      dispatch(setVehicleType(vehicleType));
+    },
+    [dispatch]
+  );
+
+  const handleEquipmentChange = useCallback(
+    (equipment) => {
+      dispatch(toggleEquipment(equipment));
+    },
+    [dispatch]
+  );
+
+  const handleSearch = useCallback(() => {
+    dispatch(resetFilters());
+
+    console.log("Фільтри застосовані:", {
+      location,
+      selectedVehicleType,
+      selectedEquipment,
+    });
+  }, [location, selectedVehicleType, selectedEquipment]);
 
   return (
     <div>
-      <Location location={location} setLocation={setLocation} />
+      <Location location={location} setLocation={handleLocationChange} />
       <div className={css.felters}>
         <h3 className={css.title}>Filters</h3>
         <VehicleEquipment
           selectedEquipment={selectedEquipment}
-          setSelectedEquipment={setSelectedEquipment}
+          setSelectedEquipment={handleEquipmentChange}
         />
         <VehicleType
           selectedVehicleType={selectedVehicleType}
-          setSelectedVehicleType={setSelectedVehicleType}
+          setSelectedVehicleType={handleVehicleTypeChange}
         />
       </div>
       <button className={css.btn} onClick={handleSearch}>

@@ -1,9 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import css from "./VehicleEquipment.module.css";
 import symbolDefs from "../../assets/symbol-defs.svg";
+import { toggleEquipment } from "../../redux/campers/slice";
 
-const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
+const VehicleEquipment = () => {
+  const dispatch = useDispatch();
+
+  const selectedEquipment = useSelector(
+    (state) => state.campers.filters.selectedEquipment
+  );
+
   const equipmentItems = [
     "AC",
     "Automatic",
@@ -12,14 +19,9 @@ const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
     "Bathroom",
     "Microwave",
   ];
-  const dispatch = useDispatch();
 
   const handleSelect = (item) => {
-    if (selectedEquipment.includes(item)) {
-      setSelectedEquipment(selectedEquipment.filter((e) => e !== item));
-    } else {
-      setSelectedEquipment([...selectedEquipment, item]);
-    }
+    dispatch(toggleEquipment(item));
   };
 
   return (
@@ -29,7 +31,9 @@ const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
       <div className={css.btnItems}>
         {equipmentItems.map((item) => (
           <button
-            className={css.btn}
+            className={`${css.btn} ${
+              selectedEquipment.includes(item) ? css.active : ""
+            }`}
             key={item}
             onClick={() => handleSelect(item)}
           >

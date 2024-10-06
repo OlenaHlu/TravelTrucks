@@ -24,11 +24,21 @@ const campersSlice = createSlice({
     },
   },
   reducers: {
-    setFilters: (state, action) => {
-      state.filters = {
-        ...state.filters,
-        ...action.payload,
-      };
+    setLocation: (state, action) => {
+      state.filters.location = action.payload;
+    },
+    setVehicleType: (state, action) => {
+      state.filters.selectedVehicleType = action.payload;
+    },
+    toggleEquipment: (state, action) => {
+      const equipment = action.payload;
+
+      if (state.filters.selectedEquipment.includes(equipment)) {
+        state.filters.selectedEquipment =
+          state.filters.selectedEquipment.filter((item) => item !== equipment);
+      } else {
+        state.filters.selectedEquipment.push(equipment);
+      }
     },
     resetFilters: (state) => {
       state.filters = {
@@ -88,7 +98,8 @@ const favoritesSlice = createSlice({
 
 export const { toggleFavorite } = favoritesSlice.actions;
 
-export const { setFilters, resetFilters } = campersSlice.actions;
+export const { setLocation, setVehicleType, toggleEquipment, resetFilters } =
+  campersSlice.actions;
 
 export const campersReducer = campersSlice.reducer;
 export const favoritesReducer = favoritesSlice.reducer;

@@ -45,3 +45,7 @@
   width: 32px;
   height: 32px;
 }
+
+.btn.active {
+  border: 1px solid var(--button-hover);
+}

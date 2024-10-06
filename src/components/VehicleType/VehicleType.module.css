@@ -42,6 +42,10 @@
   line-height: 24px;
 }
 
+.btn.active {
+  border: 1px solid var(--button-hover);
+}
+
 .listImg {
   width: 28px;
   height: 28px;
