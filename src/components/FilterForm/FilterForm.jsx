@@ -54,7 +54,7 @@ const FilterForm = () => {
   return (
     <div>
       <Location location={location} setLocation={handleLocationChange} />
-      <div className={css.felters}>
+      <div className={css.filters}>
         <h3 className={css.title}>Filters</h3>
         <VehicleEquipment
           selectedEquipment={selectedEquipment}

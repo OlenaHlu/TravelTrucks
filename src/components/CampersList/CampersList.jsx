@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import Loader from "../Loader/Loader";
 import { fetchCampersAll } from "../../redux/campers/operations";
 import css from "./CampersList.module.css";
+import { useMemo } from "react";
 
 const CampersList = () => {
   const dispatch = useDispatch();
@@ -21,40 +22,43 @@ const CampersList = () => {
 
   const [visibleCount, setVisibleCount] = useState(5);
 
+  useEffect(() => {
+    dispatch(fetchCampersAll());
+  }, [dispatch]);
+
   const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + 5);
   };
 
-  const filteredCampers = campers.filter((camper) => {
-    if (
-      filters.location &&
-      !camper.location.toLowerCase().includes(filters.location.toLowerCase())
-    ) {
-      return false;
-    }
+  const filteredCampers = useMemo(() => {
+    return campers.filter((camper) => {
+      if (
+        filters.location &&
+        !camper.location.toLowerCase().includes(filters.location.toLowerCase())
+      ) {
+        return false;
+      }
 
-    if (
-      filters.selectedVehicleType &&
-      filters.selectedVehicleType !== camper.type
-    ) {
-      return false;
-    }
+      if (
+        filters.selectedVehicleType &&
+        filters.selectedVehicleType !== camper.form
+      ) {
+        return false;
+      }
 
-    if (filters.selectedEquipment.length > 0) {
-      for (const equipment of filters.selectedEquipment) {
-        if (!camper[equipment]) {
-          return false;
+      if (filters.selectedEquipment.length > 0) {
+        for (const equipment of filters.selectedEquipment) {
+          if (!camper[equipment]) {
+            return false;
+          }
         }
       }
-    }
 
-    return true;
-  });
+      return true;
+    });
+  }, [campers, filters]);
 
-  const visibleCampers = campers.slice(0, visibleCount);
-  useEffect(() => {
-    dispatch(fetchCampersAll());
-  }, [dispatch]);
+  const visibleCampers = filteredCampers.slice(0, visibleCount);
 
   if (loading) {
     return <Loader />;
