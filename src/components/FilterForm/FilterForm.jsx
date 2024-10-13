@@ -8,6 +8,7 @@ import {
   setVehicleType,
   toggleEquipment,
   resetFilters,
+  changePage,
 } from "../../redux/campers/slice";
 
 import css from "./FilterForm.module.css";
@@ -19,7 +20,6 @@ const FilterForm = () => {
   const { location, selectedVehicleType, selectedEquipment } =
     useSelector(selectFilters);
 
-  // Обробники подій для зміни фільтрів
   const handleLocationChange = useCallback(
     (newLocation) => {
       dispatch(setLocation(newLocation));
@@ -43,6 +43,7 @@ const FilterForm = () => {
 
   const handleSearch = useCallback(() => {
     dispatch(resetFilters());
+    dispatch(changePage(1));
 
     console.log("Фільтри застосовані:", {
       location,
