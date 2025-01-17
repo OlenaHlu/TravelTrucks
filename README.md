@@ -1,8 +1,31 @@
-# React + Vite
+# Travel Trucks
+This project allows users to search, filter and add to their favorites different campers for rent.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
+- View catalog of campers.
+- Filter campers by location, equipment, and type
+- Add campers to favorites
+- View detailed information, images, and reviews for each camper
+- Book campers through a convenient form
 
-Currently, two official plugins are available:
+## Pages
+- Home Page: The starting point of the application. Users can find an overview of the platform, its purpose, and key features.
+- Catalog Page: A searchable and filterable list of available campers.
+- Camper Page: Page with detailed information about the current camper.
+- NotFound Page: Not found page
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
+- React
+- React Router
+- Redux Toolkit
+- Formik
+- Axios
+- Yup
+
+## Getting Started
+1. Clone the repository
+2. Install dependencies: npm install
+3. Run the development server: npm run dev
+
+## Author
+Hlushenkova Olena
