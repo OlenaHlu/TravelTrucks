@@ -6,8 +6,6 @@ export const selectLoading = (state) => state.campers.loading;
 
 export const selectError = (state) => state.campers.error;
 
-export const selectFilters = (state) => state.campers.filters;
-
 export const selectPage = (state) => state.campers.page;
 
 export const selectTotal = (state) => state.campers.total;
