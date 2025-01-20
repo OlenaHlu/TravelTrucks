@@ -3,54 +3,69 @@ import { useDispatch, useSelector } from "react-redux";
 import Location from "../Location/Location";
 import VehicleEquipment from "../VehicleEquipment/VehicleEquipment";
 import VehicleType from "../VehicleType/VehicleType";
-import {
-  setLocation,
-  setVehicleType,
-  toggleEquipment,
-  resetFilters,
-  changePage,
-} from "../../redux/campers/slice";
-
+import { setFilters, resetFilters } from "../../redux/filters/slice";
 import css from "./FilterForm.module.css";
-import { selectFilters } from "../../redux/campers/selectors";
+import { selectFilters } from "../../redux/filters/selectors";
 
 const FilterForm = () => {
   const dispatch = useDispatch();
 
-  const { location, selectedVehicleType, selectedEquipment } =
+  const { location, vehicleType, vehicleEquipment } =
     useSelector(selectFilters);
 
   const handleLocationChange = useCallback(
     (newLocation) => {
-      dispatch(setLocation(newLocation));
+      dispatch(
+        setFilters({
+          location: newLocation,
+          vehicleType,
+          vehicleEquipment,
+        })
+      );
     },
-    [dispatch]
+    [dispatch, vehicleType, vehicleEquipment]
   );
 
   const handleVehicleTypeChange = useCallback(
-    (vehicleType) => {
-      dispatch(setVehicleType(vehicleType));
+    (newVehicleType) => {
+      dispatch(
+        setFilters({
+          location,
+          vehicleType: newVehicleType,
+          vehicleEquipment,
+        })
+      );
     },
-    [dispatch]
+    [dispatch, location, vehicleEquipment]
   );
 
   const handleEquipmentChange = useCallback(
     (equipment) => {
-      dispatch(toggleEquipment(equipment));
+      const updatedEquipment = vehicleEquipment.includes(equipment)
+        ? vehicleEquipment.filter((item) => item !== equipment)
+        : [...vehicleEquipment, equipment];
+
+      dispatch(
+        setFilters({
+          location,
+          vehicleType,
+          vehicleEquipment: updatedEquipment,
+        })
+      );
     },
-    [dispatch]
+    [dispatch, location, vehicleType, vehicleEquipment]
   );
 
   const handleSearch = useCallback(() => {
     dispatch(resetFilters());
     dispatch(changePage(1));
 
-    console.log("Фільтри застосовані:", {
-      location,
-      selectedVehicleType,
-      selectedEquipment,
+    console.log("Фільтри скинуто. Застосовуються значення:", {
+      location: "",
+      vehicleType: "",
+      vehicleEquipment: [],
     });
-  }, [location, selectedVehicleType, selectedEquipment]);
+  }, [dispatch]);
 
   return (
     <div>
@@ -58,11 +73,11 @@ const FilterForm = () => {
       <div className={css.filters}>
         <h3 className={css.title}>Filters</h3>
         <VehicleEquipment
-          selectedEquipment={selectedEquipment}
+          selectedEquipment={vehicleEquipment}
           setSelectedEquipment={handleEquipmentChange}
         />
         <VehicleType
-          selectedVehicleType={selectedVehicleType}
+          selectedVehicleType={vehicleType}
           setSelectedVehicleType={handleVehicleTypeChange}
         />
       </div>

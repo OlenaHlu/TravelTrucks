@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CamperPhoto from "../CamperPhoto/CamperPhoto";
 import CardEquipments from "../CardEquipments/CardEquipments";
-import { toggleFavorite } from "../../redux/campers/slice";
+import { toggleFavorite } from "../../redux/favorites/slice";
+import { selectFavorites } from "../../redux/favorites/selectors";
 import css from "./CamperCard.module.css";
 import symbolDefs from "../../assets/symbol-defs.svg";
 
@@ -26,19 +27,18 @@ const CamperCard = ({ camper }) => {
 
   const dispatch = useDispatch();
 
-  const favorites = useSelector((state) => state.favorites) || [];
+  const favorites = useSelector(selectFavorites);
   const isFavorite = favorites.includes(id);
+
   const handleFavoriteClick = () => {
     dispatch(toggleFavorite(id));
   };
 
   const maxLength = 64;
-  function cutText(description, maxLength) {
-    if (description.length <= maxLength) {
-      return description;
-    }
-    return description.slice(0, maxLength) + "...";
-  }
+  const cutText = (description, maxLength) =>
+    description.length <= maxLength
+      ? description
+      : description.slice(0, maxLength) + "...";
 
   return (
     <div className={css.cardContainer}>

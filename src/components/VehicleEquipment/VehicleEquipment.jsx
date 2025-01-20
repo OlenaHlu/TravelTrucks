@@ -2,13 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import css from "./VehicleEquipment.module.css";
 import symbolDefs from "../../assets/symbol-defs.svg";
-import { toggleEquipment } from "../../redux/campers/slice";
+import { setFilters } from "../../redux/filters/slice";
 
 const VehicleEquipment = () => {
   const dispatch = useDispatch();
 
   const selectedEquipment = useSelector(
-    (state) => state.campers.filters.selectedEquipment
+    (state) => state.filters.vehicleEquipment
   );
 
   const equipmentItems = [
@@ -21,7 +21,16 @@ const VehicleEquipment = () => {
   ];
 
   const handleSelect = (item) => {
-    dispatch(toggleEquipment(item));
+    const newEquipment = selectedEquipment.includes(item)
+      ? selectedEquipment.filter((equipment) => equipment !== item)
+      : [...selectedEquipment, item];
+    dispatch(
+      setFilters({
+        location: "",
+        vehicleType: "",
+        vehicleEquipment: newEquipment,
+      })
+    );
   };
 
   return (

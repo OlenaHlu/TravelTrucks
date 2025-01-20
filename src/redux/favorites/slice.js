@@ -11,9 +11,9 @@ const favoritesSlice = createSlice({
     toggleFavorite: (state, action) => {
       const camperId = action.payload;
       if (state.favIds.includes(camperId)) {
-        state.favIds = state.favIds.filter((favId) => favId !== id);
+        state.favIds = state.favIds.filter((favId) => favId !== camperId);
       } else {
-        state.favIds.push(id);
+        state.favIds.push(camperId);
       }
     },
   },

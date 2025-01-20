@@ -27,6 +27,9 @@ const campersSlice = createSlice({
     resetCampers: (state) => {
       state.items = [];
     },
+    changePage: (state, action) => {
+      state.page = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -34,11 +37,10 @@ const campersSlice = createSlice({
       .addCase(fetchCampersAll.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        const page = state.page;
-        if (page !== 1) {
-          state.items = [...state.items, ...action.payload.items];
-        } else {
+        if (state.page === 1) {
           state.items = action.payload.items;
+        } else {
+          state.items = [...state.items, ...action.payload.items];
         }
         state.total = action.payload.total;
       })
@@ -54,6 +56,6 @@ const campersSlice = createSlice({
   },
 });
 
-export const { resetCampers } = campersSlice.actions;
+export const { resetCampers, changePage } = campersSlice.actions;
 
 export const campersReducer = campersSlice.reducer;

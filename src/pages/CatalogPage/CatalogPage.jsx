@@ -5,15 +5,15 @@ import {
   selectCampers,
   selectError,
   selectLoading,
-  selectFilters,
   selectPage,
   selectTotalPages,
 } from "../../redux/campers/selectors";
+import { selectFilters } from "../../redux/filters/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchCampersAll } from "../../redux/campers/operations";
 import Loader from "../../components/Loader/Loader";
-import { changePage } from "../../redux/campers/slice";
+import { changePage, resetCampers } from "../../redux/campers/slice";
 
 import css from "./CatalogPage.module.css";
 
@@ -31,29 +31,18 @@ const CatalogPage = () => {
   // console.log("Page: ", page);
 
   useEffect(() => {
-    dispatch(fetchCampersAll());
-  }, [dispatch, filters, page]);
+    dispatch(resetCampers());
+    dispatch(fetchCampersAll({ page: 1, filters }));
+  }, [dispatch, filters]);
 
-  const filterCampers = (campers, filters) => {
-    return campers.filter((camper) => {
-      const matchesLocation =
-        !filters.location || camper.location.includes(filters.location);
-      const matchesVehicleType =
-        !filters.selectedVehicleType ||
-        camper.form === filters.selectedVehicleType;
-
-      const matchesEquipment = filters.selectedEquipment.every(
-        (equipment) => camper[equipment] === true
-      );
-
-      return matchesLocation && matchesVehicleType && matchesEquipment;
-    });
-  };
-
-  const filteredCampers = filterCampers(campers, filters);
+  useEffect(() => {
+    dispatch(fetchCampersAll({ page, filters }));
+  }, [dispatch, page]);
 
   const handleLoadMore = () => {
-    dispatch(changePage(page + 1));
+    if (page < totalPages) {
+      dispatch(changePage(page + 1));
+    }
   };
   return (
     <>
@@ -63,7 +52,7 @@ const CatalogPage = () => {
           <FilterForm />
           {!error ? (
             <CampersList
-              campers={filteredCampers}
+              campers={campers}
               totalPages={totalPages}
               page={page}
               handleLoadMore={handleLoadMore}
