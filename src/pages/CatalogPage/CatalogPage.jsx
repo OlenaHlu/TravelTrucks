@@ -26,10 +26,6 @@ const CatalogPage = () => {
   const page = useSelector(selectPage);
   const totalPages = useSelector(selectTotalPages);
 
-  // console.log("Campers: ", campers);
-  // console.log("Filters: ", filters);
-  // console.log("Page: ", page);
-
   useEffect(() => {
     dispatch(resetCampers());
     dispatch(fetchCampersAll({ page: 1, filters }));
@@ -47,23 +43,22 @@ const CatalogPage = () => {
   return (
     <>
       <Header />
-      {!loading ? (
-        <div className={css.catalogContainer}>
-          <FilterForm />
-          {!error ? (
-            <CampersList
-              campers={campers}
-              totalPages={totalPages}
-              page={page}
-              handleLoadMore={handleLoadMore}
-            ></CampersList>
-          ) : (
-            <></>
-          )}
-        </div>
-      ) : (
-        <Loader></Loader>
-      )}
+      <div className={css.catalogContainer}>
+        {loading && <Loader />}
+        <FilterForm />
+        {!error ? (
+          <div className={css.listContainer}>
+            <CampersList campers={campers} />
+            {!loading && page < totalPages && (
+              <button className={css.loadMoreBtn} onClick={handleLoadMore}>
+                Load More
+              </button>
+            )}
+          </div>
+        ) : (
+          <p>Error: {error}</p>
+        )}
+      </div>
     </>
   );
 };
