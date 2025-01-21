@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import css from "./VehicleEquipment.module.css";
 import symbolDefs from "../../assets/symbol-defs.svg";
 import { setFilters } from "../../redux/filters/slice";
+import { selectFilters } from "../../redux/filters/selectors";
 
 const VehicleEquipment = () => {
   const dispatch = useDispatch();
 
-  const selectedEquipment = useSelector(
-    (state) => state.filters.vehicleEquipment
-  );
+  const {
+    location,
+    vehicleType,
+    vehicleEquipment: selectedEquipment,
+  } = useSelector(selectFilters);
 
   const equipmentItems = [
     "AC",
@@ -26,8 +29,8 @@ const VehicleEquipment = () => {
       : [...selectedEquipment, item];
     dispatch(
       setFilters({
-        location: "",
-        vehicleType: "",
+        location,
+        vehicleType,
         vehicleEquipment: newEquipment,
       })
     );
