@@ -1,43 +1,63 @@
-import { useState, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Location from "../Location/Location";
 import VehicleEquipment from "../VehicleEquipment/VehicleEquipment";
 import VehicleType from "../VehicleType/VehicleType";
-import { setFilters, resetFilters } from "../../redux/filters/slice";
-import css from "./FilterForm.module.css";
+import { setFilters } from "../../redux/filters/slice";
 import { selectFilters } from "../../redux/filters/selectors";
+
+import css from "./FilterForm.module.css";
 
 const FilterForm = () => {
   const dispatch = useDispatch();
-
-  const [location, setLocation] = useState("");
-  const [vehicleEquipment, setVehicleEquipment] = useState([]);
-  const [vehicleType, setVehicleType] = useState("");
+  const { location, vehicleType, vehicleEquipment } =
+    useSelector(selectFilters);
 
   const handleLocationChange = (newLocation) => {
-    setLocation(newLocation);
-  };
-
-  const handleEquipmentChange = (equipment) => {
-    setVehicleEquipment((prev) =>
-      prev.includes(equipment)
-        ? prev.filter((item) => item !== equipment)
-        : [...prev, equipment]
-    );
-  };
-
-  const handleVehicleTypeChange = (newVehicleType) => {
-    setVehicleType(newVehicleType);
-  };
-
-  const handleSearch = () => {
     dispatch(
       setFilters({
-        location,
+        location: newLocation,
         vehicleType,
         vehicleEquipment,
       })
     );
+  };
+
+  const handleEquipmentChange = (equipment) => {
+    const newEquipment = vehicleEquipment.includes(equipment)
+      ? vehicleEquipment.filter((item) => item !== equipment)
+      : [...vehicleEquipment, equipment];
+
+    dispatch(
+      setFilters({
+        location,
+        vehicleType,
+        vehicleEquipment: newEquipment,
+      })
+    );
+  };
+
+  const handleVehicleTypeChange = (newVehicleType) => {
+    dispatch(
+      setFilters({
+        location,
+        vehicleType: newVehicleType,
+        vehicleEquipment,
+      })
+    );
+  };
+
+  const handleSearch = () => {
+    if (!location && !vehicleType && vehicleEquipment.length === 0) {
+      alert("Please select at least one filter before searching.");
+      return;
+    }
+
+    console.log("Filters applied:", {
+      location,
+      vehicleType,
+      vehicleEquipment,
+    });
   };
 
   return (

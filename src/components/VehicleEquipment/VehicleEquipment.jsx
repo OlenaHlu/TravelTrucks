@@ -1,19 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import css from "./VehicleEquipment.module.css";
+import { useSelector } from "react-redux";
 import symbolDefs from "../../assets/symbol-defs.svg";
-import { setFilters } from "../../redux/filters/slice";
-import { selectFilters } from "../../redux/filters/selectors";
 
-const VehicleEquipment = () => {
-  const dispatch = useDispatch();
+import css from "./VehicleEquipment.module.css";
 
-  const {
-    location,
-    vehicleType,
-    vehicleEquipment: selectedEquipment,
-  } = useSelector(selectFilters);
-
+const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
   const equipmentItems = [
     "AC",
     "Automatic",
@@ -27,13 +18,7 @@ const VehicleEquipment = () => {
     const newEquipment = selectedEquipment.includes(item)
       ? selectedEquipment.filter((equipment) => equipment !== item)
       : [...selectedEquipment, item];
-    dispatch(
-      setFilters({
-        location,
-        vehicleType,
-        vehicleEquipment: newEquipment,
-      })
-    );
+    setSelectedEquipment(newEquipment);
   };
 
   return (
@@ -46,6 +31,7 @@ const VehicleEquipment = () => {
             className={`${css.btn} ${
               selectedEquipment.includes(item) ? css.active : ""
             }`}
+            text={item === "transmission" ? "Automatic" : item}
             key={item}
             onClick={() => handleSelect(item)}
           >

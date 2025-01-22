@@ -15,7 +15,7 @@ const CamperCard = ({ camper }) => {
     location,
     description,
     AC,
-    automatic,
+    transmission,
     kitchen,
     TV,
     bathroom,
@@ -83,7 +83,7 @@ const CamperCard = ({ camper }) => {
         <div className={css.camperEq}>
           <CardEquipments
             AC={AC}
-            automatic={automatic}
+            transmission={transmission}
             kitchen={kitchen}
             TV={TV}
             bathroom={bathroom}

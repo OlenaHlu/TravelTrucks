@@ -3,7 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const filtersInitialState = {
   location: "",
   vehicleType: "",
-  vehicleEquipment: [],
+  vehicleEquipment: {
+    AC: false,
+    transmission: "",
+    kitchen: false,
+    TV: false,
+    bathroom: false,
+    microwave: false,
+  },
 };
 
 const filtersSlice = createSlice({
@@ -12,14 +19,18 @@ const filtersSlice = createSlice({
   reducers: {
     setFilters: (state, action) => {
       const { location, vehicleType, vehicleEquipment } = action.payload;
-      state.location = location;
-      state.vehicleType = vehicleType;
-      state.vehicleEquipment = vehicleEquipment;
+      state.location = location ?? state.location;
+      state.vehicleType = vehicleType ?? state.vehicleType;
+
+      state.vehicleEquipment = {
+        ...state.vehicleEquipment,
+        ...vehicleEquipment,
+      };
     },
     resetFilters: (state) => {
       state.location = "";
       state.vehicleType = "";
-      state.vehicleEquipment = [];
+      state.vehicleEquipment = { ...filtersInitialState.vehicleEquipment };
     },
   },
 });

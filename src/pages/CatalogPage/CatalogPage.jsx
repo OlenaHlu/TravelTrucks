@@ -56,7 +56,7 @@ const CatalogPage = () => {
             )}
           </div>
         ) : (
-          <p>Error: {error}</p>
+          <p className={css.errorText}>Error: {error}</p>
         )}
       </div>
     </>

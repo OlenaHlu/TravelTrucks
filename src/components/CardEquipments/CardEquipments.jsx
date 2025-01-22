@@ -3,7 +3,7 @@ import css from "./CardEquipments.module.css";
 
 const CardEquipments = ({
   AC,
-  automatic,
+  transmission,
   kitchen,
   TV,
   bathroom,
@@ -25,7 +25,7 @@ const CardEquipments = ({
             AC
           </li>
         )}
-        {automatic && (
+        {transmission && (
           <li className={css.equipmentItem}>
             <svg className={css.eqIcon}>
               <use xlinkHref={`${symbolDefs}#${"icon-Automatic"}`} />

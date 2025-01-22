@@ -38,3 +38,7 @@
 .loadMoreBtn:hover {
   border: 1px solid var(--button-hover);
 }
+
+.errorText {
+  width: 888px;
+}

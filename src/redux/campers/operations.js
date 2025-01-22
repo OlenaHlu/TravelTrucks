@@ -7,7 +7,15 @@ export const fetchCampersAll = createAsyncThunk(
   "campers/fetchAll",
   async ({ page, filters = {}, reset = false }, thunkAPI) => {
     try {
-      const { location, vehicleType, vehicleEquipment = [] } = filters;
+      const {
+        location,
+        vehicleType,
+        transmission,
+        vehicleEquipment = [],
+      } = filters;
+
+      console.log("Received filters:", filters);
+      console.log("Transmission received:", filters.transmission);
 
       const params = {
         page,
@@ -19,10 +27,18 @@ export const fetchCampersAll = createAsyncThunk(
       }
       if (vehicleType) {
         params.form = vehicleType;
+        console.log("Form added (vehicleType):", params.form);
       }
-      ["AC", "kitchen", "TV", "bathroom", "microwave"].forEach((equipment) => {
+
+      if (transmission) {
+        params.transmission = transmission.toLowerCase();
+        console.log("Transmission added:", params.transmission);
+      }
+
+      ["AC", "Kitchen", "TV", "Bathroom", "Microwave"].forEach((equipment) => {
         if (vehicleEquipment.includes(equipment)) {
           params[equipment] = true;
+          console.log(`Equipment added: ${equipment} = true`);
         }
       });
 
