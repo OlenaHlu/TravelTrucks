@@ -9,7 +9,6 @@ const filtersInitialState = {
     kitchen: false,
     TV: false,
     bathroom: false,
-    microwave: false,
   },
 };
 
@@ -18,20 +17,22 @@ const filtersSlice = createSlice({
   initialState: filtersInitialState,
   reducers: {
     setFilters: (state, action) => {
+      console.log("Action payload:", action.payload);
       const { location, vehicleType, vehicleEquipment } = action.payload;
-      state.location = location ?? state.location;
-      state.vehicleType = vehicleType ?? state.vehicleType;
-
-      state.vehicleEquipment = {
-        ...state.vehicleEquipment,
-        ...vehicleEquipment,
+      // state.location = location;
+      // state.vehicleType = vehicleType;
+      // state.vehicleEquipment = vehicleEquipment.flat();
+      state.filters = {
+        ...state.filters,
+        location,
+        vehicleType,
+        vehicleEquipment: {
+          ...state.filters.vehicleEquipment,
+          ...vehicleEquipment,
+        },
       };
     },
-    resetFilters: (state) => {
-      state.location = "";
-      state.vehicleType = "";
-      state.vehicleEquipment = { ...filtersInitialState.vehicleEquipment };
-    },
+    resetFilters: () => filtersInitialState,
   },
 });
 

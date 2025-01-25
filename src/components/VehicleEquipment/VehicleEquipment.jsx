@@ -31,7 +31,6 @@ const VehicleEquipment = ({ selectedEquipment, setSelectedEquipment }) => {
             className={`${css.btn} ${
               selectedEquipment.includes(item) ? css.active : ""
             }`}
-            text={item === "transmission" ? "Automatic" : item}
             key={item}
             onClick={() => handleSelect(item)}
           >

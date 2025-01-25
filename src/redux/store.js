@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
 });
 
 const persistConfig = {
-  key: "campers",
+  key: "root",
   storage,
   whitelist: ["favorites"],
 };
