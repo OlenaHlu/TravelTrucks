@@ -2,6 +2,9 @@ import CamperCard from "../CamperCard/CamperCard";
 import css from "./CampersList.module.css";
 
 const CampersList = ({ campers }) => {
+  if (!campers || campers.length === 0) {
+    return <p>No campers available.</p>;
+  }
   return (
     <div className={css.listContent}>
       <ul className={css.campersItem}>

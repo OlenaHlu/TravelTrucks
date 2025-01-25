@@ -28,7 +28,7 @@ const CardEquipments = ({
         {transmission && (
           <li className={css.equipmentItem}>
             <svg className={css.eqIcon}>
-              <use xlinkHref={`${symbolDefs}#${"icon-Automatic"}`} />
+              <use xlinkHref={`${symbolDefs}#${"icon-transmission"}`} />
             </svg>
             Automatic
           </li>

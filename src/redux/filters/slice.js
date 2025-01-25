@@ -19,18 +19,18 @@ const filtersSlice = createSlice({
     setFilters: (state, action) => {
       console.log("Action payload:", action.payload);
       const { location, vehicleType, vehicleEquipment } = action.payload;
-      // state.location = location;
-      // state.vehicleType = vehicleType;
-      // state.vehicleEquipment = vehicleEquipment.flat();
-      state.filters = {
-        ...state.filters,
-        location,
-        vehicleType,
-        vehicleEquipment: {
-          ...state.filters.vehicleEquipment,
+      if (location !== undefined) {
+        state.location = location;
+      }
+      if (vehicleType !== undefined) {
+        state.vehicleType = vehicleType;
+      }
+      if (vehicleEquipment !== undefined) {
+        state.vehicleEquipment = {
+          ...state.vehicleEquipment,
           ...vehicleEquipment,
-        },
-      };
+        };
+      }
     },
     resetFilters: () => filtersInitialState,
   },

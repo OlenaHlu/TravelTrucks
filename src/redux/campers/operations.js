@@ -9,7 +9,13 @@ export const fetchCampersAll = createAsyncThunk(
     try {
       const { location, vehicleType, vehicleEquipment = [] } = filters;
 
-      console.log("Received filters:", filters);
+      // console.log("Received filters:", filters);
+
+      const vehicleTypeMapping = {
+        Van: "panelTruck",
+        "Fully Integrated": "fullyIntegrated",
+        Alcove: "alcove",
+      };
 
       const params = {
         page,
@@ -20,25 +26,23 @@ export const fetchCampersAll = createAsyncThunk(
         params.location = location;
       }
       if (vehicleType) {
-        params.form = vehicleType;
-        console.log("Form added (vehicleType):", params.form);
+        params.form =
+          vehicleTypeMapping[vehicleType] || vehicleType.toLowerCase();
+        // console.log("Form added (vehicleType):", params.form);
       }
 
-      ["AC", "Kitchen", "TV", "Bathroom", "Microwave"].forEach((equipment) => {
-        if (vehicleEquipment.includes(equipment)) {
+      Object.keys(vehicleEquipment).forEach((equipment) => {
+        if (vehicleEquipment[equipment]) {
           params[equipment] = true;
-          console.log(`Equipment added: ${equipment} = true`);
         }
       });
 
-      console.log("Fetching with params:", params);
+      // console.log("Fetching with params:", params);
 
       const { data } = await axios.get("/campers", {
-        params: {
-          ...params,
-          limit: 5,
-        },
+        params,
       });
+      // console.log("Server response:", data);
       return { reset, ...data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

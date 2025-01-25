@@ -17,7 +17,7 @@ const campersInitialState = {
   loading: false,
   error: null,
   page: 1,
-  total: 1,
+  total: 0,
 };
 
 const campersSlice = createSlice({
@@ -25,6 +25,7 @@ const campersSlice = createSlice({
   initialState: campersInitialState,
   reducers: {
     resetCampers: (state) => {
+      state.page = 1;
       state.items = [];
     },
     changePage: (state, action) => {
@@ -35,6 +36,7 @@ const campersSlice = createSlice({
     builder
       .addCase(fetchCampersAll.pending, handlePending)
       .addCase(fetchCampersAll.fulfilled, (state, action) => {
+        console.log("Data fetched and saved to state:", action.payload.data);
         state.loading = false;
         state.error = null;
         if (state.page === 1) {
