@@ -42,7 +42,9 @@ const CatalogPage = () => {
   };
   return (
     <>
-      <Header />
+      <div className={css.header}>
+        <Header />
+      </div>
       <div className={css.catalogContainer}>
         {loading && <Loader />}
         <FilterForm />

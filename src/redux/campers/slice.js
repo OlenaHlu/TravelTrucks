@@ -36,7 +36,6 @@ const campersSlice = createSlice({
     builder
       .addCase(fetchCampersAll.pending, handlePending)
       .addCase(fetchCampersAll.fulfilled, (state, action) => {
-        console.log("Data fetched and saved to state:", action.payload.data);
         state.loading = false;
         state.error = null;
         if (state.page === 1) {

@@ -1,8 +1,12 @@
 .headerContainer {
-  background: var(--inputs);
-  height: 72px;
+  max-width: 1312px;
+  width: 100%;
+  background-color: transparent;
+  height: 24px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--badges);
-  padding: 24px 64px;
+  margin-left: auto;
+  margin-right: auto;
+  /* border-bottom: 1px solid var(--badges);
+  padding: 24px 64px; */
 }

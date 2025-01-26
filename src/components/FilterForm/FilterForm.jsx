@@ -16,7 +16,7 @@ const FilterForm = () => {
   const [tempFilters, setTempFilters] = useState({
     location,
     vehicleType,
-    vehicleEquipment,
+    vehicleEquipment: { ...vehicleEquipment },
   });
 
   const handleLocationChange = (newLocation) => {
@@ -44,16 +44,20 @@ const FilterForm = () => {
   };
 
   const handleSearch = () => {
+    const hasSelectedEquipment = Object.values(
+      tempFilters.vehicleEquipment
+    ).some((value) => value);
+
     if (
       !tempFilters.location &&
       !tempFilters.vehicleType &&
-      tempFilters.vehicleEquipment.length === 0
+      !hasSelectedEquipment
     ) {
       alert("Please select at least one filter before searching.");
       return;
     }
-    dispatch(setFilters(tempFilters));
 
+    dispatch(setFilters(tempFilters));
     console.log("Filters applied:", tempFilters);
   };
 
